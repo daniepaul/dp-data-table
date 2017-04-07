@@ -1,6 +1,11 @@
 # dp-data-table
 
-Get the AMD module located at `dp-data-table.js` and include it in your project.
+dp Data Table is a simple ready to integrate component made in React using bootstrap styling.
+
+#### Screenshot
+![dp Data Table](https://raw.githubusercontent.com/daniepaul/dp-data-table/master/screenshots/with-filter-and-pagination.png)
+
+Get the AMD module located at `index.js` and include it in your project.
 
 Here is a sample integration:
 
@@ -8,7 +13,7 @@ Here is a sample integration:
 require.config({
   paths: {
     'react': 'vendor/bower_components/react/react',
-    'DpDataTable': 'dp-data-table'
+    'DpDataTable': 'dpDataTable'
   }
 });
 
