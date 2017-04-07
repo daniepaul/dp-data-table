@@ -1,0 +1,50 @@
+.data-table-component {
+  margin-bottom: 2rem;
+  .pagination {
+    margin: 0;
+    li:not(.disabled) a {
+      cursor: pointer;
+    }
+  }
+  table thead {
+    th.action {
+      width: 10%;
+    }
+    &.c3 th:not(.action) {
+      width: 20%;
+    }
+    &.c4 th:not(.action) {
+      width: 20%;
+    }
+    &.c5 th:not(.action) {
+      width: 15%;
+    }
+    &.c6 th:not(.action) {
+      width: 15%;
+    }
+    &.c7 th:not(.action) {
+      width: 10%;
+    }
+    &.c8 th:not(.action) {
+      width: 10%;
+    }
+    &.c9 th:not(.action) {
+      width: 10%;
+    }
+  }
+  .action-buttons a {
+    margin: 0 .5rem;
+    cursor: pointer;
+  }
+
+  @keyframes fa-spin {
+    0% {
+      //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+      transform: rotate(0deg);
+    }
+    100% {
+      //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+      transform: rotate(359deg);
+    }
+  }
+}
