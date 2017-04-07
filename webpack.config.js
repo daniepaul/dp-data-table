@@ -8,14 +8,13 @@ module.exports = {
 
   output: {
     path: path.join(__dirname),
-    filename: 'dpDataTable.js',
+    filename: 'index.js',
     libraryTarget: 'umd',
     library: 'DpDataTable'
   },
 
   externals: {
-   'react': 'var React',
-   'react/addons': 'var React'
+    'react': 'react'
   },
 
   module: {
@@ -24,10 +23,10 @@ module.exports = {
         test: /\.scss$/,
         // Query parameters are passed to node-sass
         loader: 'style!css!sass?outputStyle=expanded&' +
-          'includePaths[]=' + (path.resolve(__dirname, './bower_components')) + '&' +
-          'includePaths[]=' + (path.resolve(__dirname, './node_modules'))
+        'includePaths[]=' + (path.resolve(__dirname, './bower_components')) + '&' +
+        'includePaths[]=' + (path.resolve(__dirname, './node_modules'))
       },
-      { test: /\.json$/, loader: 'json-loader'},
+      {test: /\.json$/, loader: 'json-loader'},
       {
         test: /(\.js)|(\.jsx)$/,
         exclude: /node_modules/,

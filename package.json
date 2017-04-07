@@ -1,8 +1,8 @@
 {
   "name": "dp-data-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "dp-data-table",
-  "main": "dpDataTable.js",
+  "main": "index.js",
   "scripts": {
     "test": "eslint lib/ spec/ && ./node_modules/karma/bin/karma start karma.conf.js",
     "watch-test": "./node_modules/karma/bin/karma start karma.conf.js --auto-watch --no-single-run",
@@ -12,7 +12,7 @@
     "postinstall": "bower install"
   },
   "author": "daniepaul@gmail.com",
-  "license": "BSD",
+  "license": "MIT",
   "keywords": [
     "react",
     "reactjs",
@@ -46,13 +46,11 @@
     "webpack": "~1.11.0",
     "webpack-dev-server": "~1.10.1"
   },
-  "dependencies": {
+  "peerDependencies": {
     "babel-runtime": "~5.8.20",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
-    "react": "~15.0.0",
-    "react-addons-test-utils": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "react": "~15.0.0"
   },
   "repository": "https://github.com/daniepaul/dp-data-table.git"
 }

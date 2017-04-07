@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     basePath: '.',
 
@@ -6,7 +6,7 @@ module.exports = function(config) {
     browsers: ['PhantomJS'],
 
     files: [
-      { pattern: 'node_modules/babel-polyfill/browser.js', instrument: false},
+      {pattern: 'node_modules/babel-polyfill/browser.js', instrument: false},
       // shim to workaroud PhantomJS 1.x lack of `bind` support
       // see: https://github.com/ariya/phantomjs/issues/10522
       'node_modules/es5-shim/es5-shim.js',
@@ -16,7 +16,7 @@ module.exports = function(config) {
 
       'spec/spec-helper.js',
       'spec/**/*.spec.*',
-      { pattern: 'lib/**/*', watched: true, included: false }
+      {pattern: 'lib/**/*', watched: true, included: false}
     ],
 
     preprocessors: {
@@ -36,10 +36,13 @@ module.exports = function(config) {
 
 
 /**
-  Loads configuration while ensuring sounce-map is enabled
+ Loads configuration while ensuring sounce-map is enabled
  */
-function loadWebpackConfig () {
+function loadWebpackConfig() {
   var webpackConfig = require('./webpack.config.js');
+  webpackConfig.externals = {
+    'react': 'var React'
+  };
   webpackConfig.devtool = 'inline-source-map';
   return webpackConfig;
 }
