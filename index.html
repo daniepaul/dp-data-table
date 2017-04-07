@@ -1,14 +1,44 @@
 <html>
 <head>
-  <title>sc Demo</title>
+    <title>dpDataTable Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 </head>
 <body>
-  <div id="main"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js"></script>
-  <script src="index.js"></script>
-  <script>
+<div class="container">
+    <h1>dp Data Table</h1>
+    <p>dp Data Table provides out-of-box functionality to build your data table faster. Bind the data and it just
+        works.</p>
+    <div id="main">Loading React Component.</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-with-addons.js"></script>
+<script src="MOCK_DATA.js"></script>
+<script>
+  window.react = React;
+  function onEdit(item, index) {
+    alert("Edit item " + index + " whose value is \n" + JSON.stringify(item, undefined, 2))
+  }
+  function onDelete(item, index) {
+    alert("Delete item " + index + " whose value is \n" + JSON.stringify(item, undefined, 2))
+  }
+</script>
+<script src="index.js"></script>
+<script>
     /* jshint undef:false */
-    React.render(React.createElement(dpDataTable), document.getElementById('main'));
-  </script>
+    ReactDOM.render(
+      React.createElement(DpDataTable, {
+        items: MOCK_DATA,
+        headers: {first_name: 'First Name', last_name: 'Last Name', gender: 'Gender', ip_address: 'IP Address'},
+        showFilter: true,
+        onEditing: onEdit,
+        onDeleting: onDelete
+      }, null),
+      document.getElementById('main')
+    );
+</script>
 </body>
 </html>

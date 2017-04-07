@@ -1,7 +1,7 @@
 import Unexpected from 'unexpected';
 import UnexpectedReact from 'unexpected-react';
 import React from 'react';
-import DpDataTable from '../lib/dpDataTable.js';
+import DpDataTable from '../lib';
 import * as TestUtils from 'react/lib/ReactTestUtils';
 
 const unexpect = Unexpected.clone().use(UnexpectedReact);
