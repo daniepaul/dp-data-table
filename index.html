@@ -9,36 +9,36 @@
     <h1>dp Data Table</h1>
     <p>dp Data Table provides out-of-box functionality to build your data table faster. Bind the data and it just
         works.</p>
-    <div id="main">Loading React Component.</div>
+    <div id="data-table-1">Loading React Component.</div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.slim.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-with-addons.js"></script>
 <script src="MOCK_DATA.js"></script>
 <script>
-  window.react = React;
-  function onEdit(item, index) {
-    alert("Edit item " + index + " whose value is \n" + JSON.stringify(item, undefined, 2))
+  function onEdit(e) {
+    alert("Edit item " + e.index + " whose value is \n" + JSON.stringify(e.item, undefined, 2))
   }
-  function onDelete(item, index) {
-    alert("Delete item " + index + " whose value is \n" + JSON.stringify(item, undefined, 2))
+  function onDelete(e) {
+    alert("Delete item " + e.index + " whose value is \n" + JSON.stringify(e.item, undefined, 2))
+  }
+  function onItemsChange(e) {
+    console.info(e.changeReason);
   }
 </script>
-<script src="index.js"></script>
+<script src="dpDataTable.js"></script>
 <script>
-    /* jshint undef:false */
-    ReactDOM.render(
-      React.createElement(DpDataTable, {
-        items: MOCK_DATA,
-        headers: {first_name: 'First Name', last_name: 'Last Name', gender: 'Gender', ip_address: 'IP Address'},
-        showFilter: true,
-        onEditing: onEdit,
-        onDeleting: onDelete
-      }, null),
-      document.getElementById('main')
-    );
+  window.RenderDpDataTable({
+    selector: '#data-table-1',
+    items: MOCK_DATA,
+    headers: {first_name: 'First Name', last_name: 'Last Name', gender: 'Gender', ip_address: 'IP Address'},
+    showFilter: true,
+    showSort: true,
+    onEditing: onEdit,
+    onDeleting: onDelete,
+    onItemsChange: onItemsChange
+  });
 </script>
 </body>
 </html>

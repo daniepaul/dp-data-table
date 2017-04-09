@@ -1,12 +1,12 @@
 {
   "name": "dp-data-table",
-  "version": "1.0.1",
-  "description": "dp-data-table",
-  "main": "index.js",
+  "version": "1.0.2",
+  "description": "A simple and easy to customize data table with filter and sort functionalities. This component is build using React and can be directly used in static html as well.",
+  "main": "dpDataTable.js",
   "scripts": {
     "test": "eslint lib/ spec/ && ./node_modules/karma/bin/karma start karma.conf.js",
     "watch-test": "./node_modules/karma/bin/karma start karma.conf.js --auto-watch --no-single-run",
-    "build": "webpack -p",
+    "build": "webpack",
     "rename-css-bower-dependencies": "find bower_components -name '*.css' | sed -e 'p;s/.css$/.scss/' | xargs -n2 mv",
     "start": "webpack-dev-server --inline --hot",
     "postinstall": "bower install"
@@ -14,10 +14,15 @@
   "author": "daniepaul@gmail.com",
   "license": "MIT",
   "keywords": [
-    "react",
-    "reactjs",
     "react-component",
-    "data-table",
+    "sortable table",
+    "data table",
+    "sortable data table",
+    "filterable data table",
+    "filterable table",
+    "filterable grid",
+    "easy data table",
+    "simple data table",
     "dp-data-table"
   ],
   "devDependencies": {
@@ -50,7 +55,8 @@
     "babel-runtime": "~5.8.20",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
-    "react": "~15.0.0"
+    "react": "~15.0.0",
+    "react-dom": "~15.0.0"
   },
   "repository": "https://github.com/daniepaul/dp-data-table.git"
 }

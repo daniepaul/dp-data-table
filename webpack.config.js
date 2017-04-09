@@ -8,13 +8,14 @@ module.exports = {
 
   output: {
     path: path.join(__dirname),
-    filename: 'index.js',
+    filename: 'dpDataTable.js',
     libraryTarget: 'umd',
     library: 'DpDataTable'
   },
 
   externals: {
-    'react': 'react'
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
 
   module: {
