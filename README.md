@@ -36,6 +36,7 @@ import DpDataTable from 'dp-data-table';
 To have proper styling, include bootstrap.
 
 ## Options
+The options are passed in as props when used as a React component.
 
  Option    | Type       | Description 
  ----------|------------|------------
