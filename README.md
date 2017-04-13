@@ -12,7 +12,7 @@ Here is a sample integration:
 ```js
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-dom.js"></script>
-<script src="dpDataTable.js"></script>
+<script src="dist/dpDataTable.js"></script>
 <script>
   window.RenderDpDataTable({
     selector: '#data-table-1',

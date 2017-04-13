@@ -1,22 +1,22 @@
 /* jshint node: true */
 var path = require('path');
-
+var argv = require('yargs').argv;
 
 module.exports = {
   context: path.join(__dirname),
-  entry: './lib/index.js',
+  entry: './src/index.js',
 
   output: {
-    path: path.join(__dirname),
+    path: path.join(__dirname, argv.ships == "dist" ? 'dist' : 'lib'),
     filename: 'dpDataTable.js',
     libraryTarget: 'umd',
     library: 'DpDataTable'
   },
 
-  externals: {
+  externals: argv.ships == "dist" ? {
     'react': 'React',
     'react-dom': 'ReactDOM'
-  },
+  } : {},
 
   module: {
     loaders: [
