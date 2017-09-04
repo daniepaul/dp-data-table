@@ -39,7 +39,7 @@ module.exports = function (config) {
  Loads configuration while ensuring sounce-map is enabled
  */
 function loadWebpackConfig() {
-  var webpackConfig = require('./webpack.config.js');
+  var webpackConfig = require('./webpack.config.js')({});
   webpackConfig.externals = {
     'react': 'var React'
   };

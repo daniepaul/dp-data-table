@@ -1,22 +1,25 @@
-import React, {Component, PropTypes} from 'react';
-import map from 'lodash/map';
-import kebabCase from 'lodash/kebabCase';
-import ceil from 'lodash/ceil';
-import keys from 'lodash/keys';
-import times from 'lodash/times';
-import chunk from 'lodash/chunk';
-import filter from 'lodash/filter';
-import some from 'lodash/some';
-import toString from 'lodash/toString';
-import toLower from 'lodash/toLower';
-import startsWith from 'lodash/startsWith';
-import size from 'lodash/size';
-import includes from 'lodash/includes';
-import extend from 'lodash/extend';
-import sortBy from 'lodash/sortBy';
-import reverse from 'lodash/reverse';
-import isFunction from 'lodash/isFunction';
-import isNumber from 'lodash/isNumber';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {
+  map,
+  kebabCase,
+  ceil,
+  keys,
+  times,
+  chunk,
+  filter,
+  some,
+  toString,
+  toLower,
+  startsWith,
+  size,
+  includes,
+  extend,
+  sortBy,
+  reverse,
+  isFunction,
+  isNumber
+} from 'lodash';
 import classNames from 'classnames';
 
 import './dpDataTable.scss';
@@ -33,6 +36,7 @@ class DpDataTable extends Component {
       defaultSort: PropTypes.string,
       onEditing: PropTypes.func,
       onDeleting: PropTypes.func,
+      onView: PropTypes.func,
       itemsPerPage: PropTypes.number,
       showFilter: PropTypes.bool,
       showSort: PropTypes.bool,
@@ -41,7 +45,9 @@ class DpDataTable extends Component {
       iconClasses: PropTypes.object,
       onSorting: PropTypes.func,
       onFiltering: PropTypes.func,
-      onItemsChange: PropTypes.func
+      onItemsChange: PropTypes.func,
+      showContextColor: PropTypes.bool,
+      className: PropTypes.string
     };
   }
 
@@ -58,12 +64,12 @@ class DpDataTable extends Component {
   }
 
   render() {
-    const {hidePagination, showFilter, isLoading, iconClasses} = this.props;
+    const {hidePagination, showFilter, isLoading, iconClasses, className} = this.props;
     const filteredItems = this._filterItems();
     const icons = extend({'LOADING': 'glyphicon glyphicon-refresh'}, iconClasses);
     return (
-      <div className="row data-table-component" data-toggle="table">
-        {isLoading && (<div className="isLoading-container"><i className={icons.LOADING}></i></div>)}
+      <div className={classNames(className, 'row', 'data-table-component')} data-toggle="table">
+        {isLoading && (<div className="isLoading-container"><i className={icons.LOADING} /></div>)}
         {!isLoading && showFilter && this._renderFilter()}
         {!isLoading && !hidePagination && this._renderHeaderPagination(filteredItems)}
         {!isLoading && (<div className="table-responsive col-xs-12">
@@ -101,35 +107,37 @@ class DpDataTable extends Component {
             <th key={'header-' + kebabCase(headerKey)} data-sortable={isSortable} data-sort-key={headerKey}
                 data-sort-order={solSortOrder} onClick={() => this._onSortChange(headerKey, isSortable)}>
               {header}
-              {isSortable && (<i className={classNames('pull-right', sortClasses['SORT_' + solSortOrder])}></i>)}
+              {isSortable && (<i className={classNames('pull-right', sortClasses['SORT_' + solSortOrder])} />)}
             </th>
           );
         })}
-        <th className="action">
-        </th>
+        <th className="action" />
       </tr>
       </thead>
     );
   }
 
   _renderRow(filteredItems) {
-    const {headers, onEditing, itemsPerPage = this.DEFAULT_PAGE_ITEM_COUNT, hidePagination, onDeleting, iconClasses, items} = this.props;
+    const {headers, onEditing, itemsPerPage = this.DEFAULT_PAGE_ITEM_COUNT, hidePagination, onDeleting, iconClasses, items, showContextColor, onView} = this.props;
     const currentPage = !hidePagination ? this.state.currentPage : 0;
     const pagedItems = !hidePagination ? chunk(filteredItems, itemsPerPage) : [filteredItems];
     const icons = extend({
       'DELETE': 'glyphicon glyphicon-trash',
       'EDIT': 'glyphicon glyphicon-pencil',
+      'VIEW': 'glyphicon glyphicon-new-window',
       'POPOVER_VIEW': 'glyphicon glyphicon-search'
     }, iconClasses);
     const itemHeaders = size(headers) > 0 ? keys(headers) : keys(items[0]);
+    const contextCss = showContextColor ? item['__dp__contextCss'] : '';
     return map(pagedItems[currentPage], (item, index) => {
       const {popover} = item;
       return (
-        <tr key={index}>
+        <tr key={index} className={contextCss}>
           {map(itemHeaders, (header) => <td key={'item-' + index + '-' + kebabCase(header)}>{item[header]}</td>)}
           <td className="action-buttons">
             {onEditing && <a onClick={() => this._onEditing(item, index)}><i className={icons.EDIT}/></a>}
             {onDeleting && <a onClick={() => this._onDeleting(item, index)}><i className={icons.DELETE}/></a>}
+            {onView && <a onClick={() => this._onViewing(item, index)}><i className={icons.VIEW}/></a>}
             {popover && <a data-toggle="popover" data-trigger="hover"
                            data-placement="left" data-html="true" data-content={popover}>
               <i className={icons.POPOVER_VIEW}/>
@@ -145,7 +153,11 @@ class DpDataTable extends Component {
   }
 
   componentDidUpdate() {
+    const { filter } = this.state;
     this.triggerPopover();
+    if(this.refs && this.refs.txtFilter) {
+      this.refs.txtFilter.value = filter || '';
+    }
   }
 
   triggerPopover() {
@@ -218,9 +230,9 @@ class DpDataTable extends Component {
     return (<nav className={paginationClass}>
       <ul className="pagination pull-right">
         <li className={classNames({'disabled': previousPage === undefined})}><a
-          onClick={() => this._onPageClick(previousPage)}><i className={icons.PAGE_PREV}></i></a></li>
+          onClick={() => this._onPageClick(previousPage)}><i className={icons.PAGE_PREV} /></a></li>
         <li className={classNames({'disabled': nextPage === undefined})}><a
-          onClick={() => this._onPageClick(nextPage)}><i className={icons.PAGE_NEXT}></i></a></li>
+          onClick={() => this._onPageClick(nextPage)}><i className={icons.PAGE_NEXT} /></a></li>
       </ul>
     </nav>);
   }
@@ -248,6 +260,14 @@ class DpDataTable extends Component {
     this._onItemsChange({changeReason: 'ROW_EDITING', index, item});
     if (isFunction(onEditing)) {
       onEditing({item, index});
+    }
+  }
+
+  _onViewing(item, index) {
+    const {onView} = this.props;
+    this._onItemsChange({changeReason: 'ROW_VIEWING', index, item});
+    if (isFunction(onView)) {
+      onView({item, index});
     }
   }
 

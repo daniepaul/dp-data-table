@@ -51,9 +51,11 @@ The options are passed in as props when used as a React component.
  onFiltering  | function | Override function for filter. ```onFiltering({items, filterString})```
  showSort  | boolean | Boolean to show column sort
  sortableFields  | array | Array of column keys which can be sorted.
+ showContextColor  | boolean | Boolean to add context css to table row. Setting this to ```true``` will apply the ```__dp__contextCss``` property of item, to the row.
  onSorting  | function | Override function to sort```onDeleting({items, sortKey, sortOrder})```
  onEditing  | function | Event handler for editing a row. The edit icon is enabled only when a function is supplied to this option.```onEditing({item, index})```
  onDeleting  | function | Event handler for deleting a row. The delete icon is enabled only when a function is supplied to this option.```onDeleting({item, index})```
+ onView  | function | Event handler for viewing details of a row. The view icon is enabled only when a function is supplied to this option.```onView({item, index})```
  onItemsChange  | function | Event handler to get all changes that happen within the component. ```onItemChange(e)```
 
 ## Development
