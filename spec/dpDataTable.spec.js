@@ -106,3 +106,45 @@ describe('Data table basic component with filter', function () {
     </div>));
   });
 });
+
+describe('Data table basic component with css context', function () {
+  var component;
+  var items = [{name: 'Test Name 1', type: 'Type 1', '__dp__contextCss': 'success'}, {name: 'Test Name 2', type: 'Type 1', '__dp__contextCss': 'warning'}];
+
+  beforeEach(function () {
+    component = TestUtils.renderIntoDocument(
+      <DpDataTable items={items} showFilter showContextColor/>
+    );
+  });
+
+  it('should exist', function () {
+    expect(TestUtils.isCompositeComponent(component)).toBeTruthy();
+  });
+
+  it('should render component', function () {
+    unexpect(component, 'to have rendered', (<div className="data-table-component" />));
+  });
+
+  it('should render filter input', function () {
+    unexpect(component, 'to have rendered', (<div className="data-table-component">
+      <div>
+        <div className="input-group">
+          <input id="filterTextInput"/>
+        </div>
+      </div>
+    </div>));
+  });
+
+  it('should render two rows', function () {
+    unexpect(component, 'to have rendered', (<div className="data-table-component">
+      <div>
+        <table>
+          <tbody>
+          <tr className="success" />
+          <tr className="warning" />
+          </tbody>
+        </table>
+      </div>
+    </div>));
+  });
+});

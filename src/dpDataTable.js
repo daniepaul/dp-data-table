@@ -128,9 +128,9 @@ class DpDataTable extends Component {
       'POPOVER_VIEW': 'glyphicon glyphicon-search'
     }, iconClasses);
     const itemHeaders = size(headers) > 0 ? keys(headers) : keys(items[0]);
-    const contextCss = showContextColor ? item['__dp__contextCss'] : '';
     return map(pagedItems[currentPage], (item, index) => {
       const {popover} = item;
+      const contextCss = showContextColor ? item['__dp__contextCss'] : '';
       return (
         <tr key={index} className={contextCss}>
           {map(itemHeaders, (header) => <td key={'item-' + index + '-' + kebabCase(header)}>{item[header]}</td>)}
