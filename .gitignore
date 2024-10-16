@@ -72,5 +72,5 @@ typings/
 
 # dotenv environment variables file
 .env
-
+.history
 

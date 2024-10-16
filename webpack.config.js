@@ -6,29 +6,32 @@ module.exports = function(env) {
  return {
     context: path.join(__dirname),
     entry: './src/index.js',
-
+    mode: env.dist ? 'production' : 'development',
     output: {
-      path: path.join(__dirname, env.ships === 'dist' ? 'dist' : 'lib'),
+      path: path.join(__dirname, env.dist ? 'dist' : 'lib'),
       filename: 'dpDataTable.js',
       libraryTarget: 'umd',
       library: 'DpDataTable'
     },
 
-    externals: env.ships === 'dist' ? {
+    externals: env.dist ? {
       'react': 'React',
       'react-dom': 'ReactDOM'
     } : {},
 
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.scss$/,
           // Query parameters are passed to node-sass
           use: [
-            'style-loader',
-            { loader: 'css-loader', options: { sourceMap: 1 } },
-            { loader: 'sass-loader', options: { sourceMap: 1 } }
-          ]
+            // Creates `style` nodes from JS strings
+            "style-loader",
+            // Translates CSS into CommonJS
+            "css-loader",
+            // Compiles Sass to CSS
+            "sass-loader",
+          ],
         },
         {
           test: /(\.js)|(\.jsx)$/,

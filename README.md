@@ -5,13 +5,15 @@ dp Data Table is a simple ready to integrate component made in React using boots
 #### Screenshot
 ![dp Data Table](https://raw.githubusercontent.com/daniepaul/dp-data-table/master/screenshots/with-filter-and-pagination.png)
 
+### [Demo Link](https://daniepaul.github.io/dp-data-table/)
+
 ## Integration
 
 Here is a sample integration:
 
 ```js
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="dist/dpDataTable.js"></script>
 <script>
   window.RenderDpDataTable({
