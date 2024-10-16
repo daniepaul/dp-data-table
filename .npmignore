@@ -1,0 +1,9 @@
+node_modules/
+src/
+spec/
+lib/
+screenshots/
+.history/
+MOCK_DATA.js
+index.html
+karma.conf.js
