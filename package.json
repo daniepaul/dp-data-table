@@ -1,6 +1,6 @@
 {
   "name": "dp-data-table",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A simple and easy to customize data table with filter and sort functionalities. This component is build using React and can be directly used in static html as well.",
   "main": "lib/dpDataTable.js",
   "unpkg": "lib/dpDataTable.js",
